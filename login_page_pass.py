@@ -12,7 +12,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from time import sleep
 
-
 def automated_log_in_selenium (path_to_driver,website, username_xpath, password_xpath,
                                signin_xpath, username, password):
     '''
@@ -23,28 +22,20 @@ def automated_log_in_selenium (path_to_driver,website, username_xpath, password_
     signin_xpath   : a string for xpath of sign-in button  (can be found with inspect element of browser)
     username :  astring for user name that was created
     password : a string for password that was created
-    
+    return driver : driver object that is now inside the website  and can be used to scrap the website after that
     '''
-    
-    
     driver = webdriver.Chrome(executable_path= path_to_driver)
 
     driver.get(website)
-    sleep(2)
-
-    nikname=driver.find_element_by_xpath(username_xpath).send_keys(username)
+    sleep(2) # waits 2 seconds
+    driver.find_element_by_xpath(username_xpath).send_keys(username)
     driver.find_element_by_xpath(password_xpath).send_keys(password)
     driver.find_element_by_xpath(signin_xpath).click()
-
-
-    wait = WebDriverWait(driver, 5)
-
-
-    
+    wait = WebDriverWait(driver, 5) # another method to wait
     return driver
     
 
 driver_logged_in = automated_log_in_selenium ('''with all parameters''') # we are in! so get any page after this ....
-driver_logged_in.get('''another page of your website''')    
+driver_logged_in.get('''another page of the website''')    
     
     
